@@ -8,7 +8,6 @@ X_temp = data[:,0]
 y = data[:,1]
 
 ''' Compute the cost function J(\theta)'''
-
 m = X_temp.shape[0]
 theta = np.array([[-1],[2]])
 
