@@ -1,3 +1,5 @@
+''' IMPLEMENTATION OF A ONE-VARIABLE LINEAR REGRESSION ALGORITHM USING GRADIETN DESCENT '''
+
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -19,7 +21,6 @@ J = (0.5/m)*(np.dot(M.T, M))
 
 '''Perform gradient descent'''
 alpha = 0.01
-
 num_iter = 1500
 for i in range(num_iter):
     M = np.dot(X,theta) - y
