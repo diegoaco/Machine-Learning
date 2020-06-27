@@ -1,5 +1,3 @@
-'''MULTIVARIABLE LINEAR REGRESSION ALGORITHM USING NORMALISATION'''
-
 
 import numpy as np
 from matplotlib import pyplot as plt
