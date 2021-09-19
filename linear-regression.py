@@ -1,5 +1,6 @@
 ''' Implementation of Machine Learning gradient descent algorithm,
-compared to a normal equation approach '''
+compared to a normal equation approach. Also computes the R^2 value
+and tracks the behaviour of the cost function. '''
 
 
 import numpy as np
