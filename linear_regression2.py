@@ -1,5 +1,5 @@
 ''' Multivariable machine learning implemantation using gradient descent and
-the normal equation '''
+the normal equation. Calculates the R^2 value and keeps track of the cost function. '''
 
 import numpy as np
 from matplotlib import pyplot as plt
