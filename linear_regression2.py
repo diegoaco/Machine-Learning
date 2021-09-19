@@ -1,5 +1,5 @@
 ''' Multivariable machine learning implemantation using gradient descent and
-the normal equation. Calculates the R^2 value and keeps track of the cost function. '''
+the normal equation '''
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -8,14 +8,17 @@ from matplotlib import pyplot as plt
 rough_data = np.loadtxt("/Users/diego/python/Machine Learning/ex1data2.txt", delimiter=",")
 data = np.asmatrix(rough_data)
 X_temp = data[:,[0,1]]
-y = data[:, 2]
-m = y.shape[0]
+y_temp = data[:, 2]
+m = y_temp.shape[0]
 
 '''Normalisation and construction of the X matrix'''
-mean = np.mean(X_temp, axis=0)
-sigma = np.std(X_temp, axis=0)
-X_norm = (X_temp-mean)/sigma
-X = np.hstack((np.ones((m,1)), X_norm))
+X_mean = np.mean(X_temp, axis=0)
+X_sigma = np.std(X_temp, axis=0)
+X_nor = (X_temp-X_mean)/X_sigma
+X = np.hstack((np.ones((m,1)), X_nor))
+y_mean = np.mean(y_temp, axis=0)
+y_sigma = np.std(y_temp, axis = 0)
+y = (y_temp - y_mean)/y_sigma
 
 
 ''' Using the normal equation '''
@@ -29,12 +32,12 @@ cost_nor = (0.5/m)*(np.dot(M.T, M))
 
 print('Using the normal equation:')
 print('The parameters are:', theta_nor[0,0], theta_nor[1,0], 'and', theta_nor[2,0])
-print('The cost function minimum is:', cost_nor[0,0])
+print('Cost function minimum is:', cost_nor[0,0])
 
 
 '''Perform gradient descent'''
 alpha = 0.01   # learning rate
-i_max = 10000  # Max number of steps
+i_max = 5000  # Max number of steps
 cost = [np.inf]   # Cost function vector
 e = 1e-10   # difference parameter
 theta_grad = np.array([[0],[0], [0]])  # Ansatz for theta
@@ -61,7 +64,7 @@ pred_nor = np.dot(X, theta_nor)
 pred_grad = np.dot(X, theta_grad)
 
 # R^2 calculation:
-res = pred_nor - y
+res = pred_grad - y
 ss_res = np.dot(res.T, res)
 res_var = y - np.mean(y, axis=0)
 ss_tot = np.dot(res_var.T, res_var)
@@ -73,14 +76,14 @@ print('The R^2 value is:', r2[0,0])
 # Setting up the grid for the predicted surface
 x_range = np.arange(-5, 5, 0.25)
 y_range = np.arange(-5, 5, 0.25)
-x_coord, y_coord = np.meshgrid(x_range,y_range)
+x_coord, y_coord = np.meshgrid(x_range, y_range)
 z_coord = theta_nor[0,0] + x_coord*theta_nor[1,0] + y_coord*theta_nor[2,0]
 fig = plt.figure()
 
 # Plotting the surface and (normalised) data
 ax = fig.gca(projection = '3d')
 surf = ax.plot_surface(x_coord, y_coord, z_coord)
-ax.scatter(X_norm[:,0], X_norm[:,1], rough_data[:,2], c='r')
+ax.scatter(X_nor[:,0], X_nor[:,1], y[:,0], c='r')
 plt.show()
 
 # Plot the cost function:
