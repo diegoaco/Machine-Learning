@@ -1,5 +1,6 @@
-''' Multivariable machine learning implemantation using gradient descent and
-the normal equation '''
+''' Multivariable machine learning implementation using gradient descent and
+the normal equation, both normalised. Also computes the R^2 value and tracks the
+behaviour of the cost function. '''
 
 import numpy as np
 from matplotlib import pyplot as plt
