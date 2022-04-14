@@ -77,7 +77,7 @@ plt.ylabel('Cost function')
 plt.show()
 
 
-''' R^2 value'''
+''' R^2 value '''
 res = y - pred_grad
 diff_avg = y - np.mean(y)
 SSres = np.dot(res.T, res)[0,0]
