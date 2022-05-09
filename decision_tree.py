@@ -1,7 +1,7 @@
 ''' DECISION TREE ALGORTIHM FOR CLASSIFICATION
 It incorportaes a correlation analysis to exlcude redundant variables.
 Also, it deals with categorical string variables and transforms them into numerical ones 
-This means, no preparation in Excel is necessary. '''
+This means that no preparation in Excel is necessary. '''
 
 
 ''' Libraries '''
@@ -56,8 +56,11 @@ class_names = ['B', 'M']
 
 def build_tree(features, targets, feature_names, class_names):
     # Split the dataset into training and test features:
-    train_features, test_features, train_targets, test_targets = train_test_split(features, targets, test_size=0.9, random_state=100)
-    # Create the decision tree
+    train_features, test_features, train_targets, test_targets = train_test_split(features, targets, test_size=0.25, random_state=100)
+    # Create the decision tree.
+    # Note: by default, the algorithm uses Gini impurity to perform the classification
+    # (see f. ex. https://towardsdatascience.com/gini-impurity-measure-dbd3878ead33 or 
+    # https://data36.com/coding-a-decision-tree-in-python-classification-tree-gini-impurity/)
     decision_tree = tree.DecisionTreeClassifier(random_state=456)
     decision_tree = decision_tree.fit(train_features, train_targets)
 
@@ -66,7 +69,7 @@ def build_tree(features, targets, feature_names, class_names):
     tree.plot_tree(decision_tree, feature_names=feature_names, filled=True, rounded=False, class_names=class_names)
     plt.savefig("decision_tree.png")
 
-    # Calculates the accuracy:
+    # Calculates the accuracy using the test dataset:
     train_error = round(decision_tree.score(train_features, train_targets), 2)
     test_error = round(decision_tree.score(test_features, test_targets), 4)
     print("Training Set Mean Accuracy = " + str(train_error))
